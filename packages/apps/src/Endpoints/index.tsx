@@ -18,6 +18,11 @@ import { isAscii } from '@polkadot/util';
 import { useTranslation } from '../translate.js';
 import GroupDisplay from './Group.js';
 
+const shadowApiUrl = 'wss://rpc2-shadow.crust.network';
+const paraChainApiUrl = 'wss://crust-parachain.crustapps.net';
+const directUrl = 'https://shadow-apps.crust.network';
+const directUrl2 = 'https://para-apps.crust.network';
+
 interface Props {
   className?: string;
   offset?: number | string;
@@ -245,15 +250,24 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
 
   const _onApply = useCallback(
     (): void => {
-      store.set('localFork', '');
-      settings.set({ ...(settings.get()), apiUrl });
-      window.location.assign(`${window.location.origin}${window.location.pathname}?rpc=${encodeURIComponent(apiUrl)}${window.location.hash}`);
+      console.log(apiUrl);
+      if (apiUrl.startsWith('wss://rpc-sha')) {
+        window.location.href = `${directUrl}?rpc=${encodeURIComponent(shadowApiUrl)}${window.location.hash}`;
+        onClose();
+      } else if (apiUrl.startsWith('wss://crust-para')) {
+        window.location.href = `${directUrl2}?rpc=${encodeURIComponent(paraChainApiUrl)}${window.location.hash}`;
+        onClose();
+      } else {
+        store.set('localFork', '');
+        settings.set({ ...(settings.get()), apiUrl });
+        window.location.assign(`${window.location.origin}${window.location.pathname}?rpc=${encodeURIComponent(apiUrl)}${window.location.hash}`);
 
-      if (!hasUrlChanged) {
-        window.location.reload();
+        if (!hasUrlChanged) {
+          window.location.reload();
+        }
+
+        onClose();
       }
-
-      onClose();
     },
     [apiUrl, onClose, hasUrlChanged]
   );

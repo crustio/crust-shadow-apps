@@ -22,6 +22,7 @@ export { chainsComposableFinancePNG } from './generated/composableFinancePNG.js'
 export { chainsCoretimeKusamaSVG } from './generated/coretime-kusamaSVG.js';
 export { chainsCreditcoinTestPNG } from './generated/creditcoin-testPNG.js';
 export { chainsCreditcoinPNG } from './generated/creditcoinPNG.js';
+export { chainsCrustSVG } from './generated/crustSVG.js';
 export { chainsDebioSVG } from './generated/debioSVG.js';
 export { chainsDorafactoryPNG } from './generated/dorafactoryPNG.js';
 export { chainsDustyPNG } from './generated/dustyPNG.js';
@@ -65,6 +66,7 @@ export { chainsPopNetworkSVG } from './generated/pop-networkSVG.js';
 export { chainsQpnPNG } from './generated/qpnPNG.js';
 export { chainsRiodefiPNG } from './generated/riodefiPNG.js';
 export { chainsRococoSVG } from './generated/rococoSVG.js';
+export { chainsShadowSVG } from './generated/shadowSVG.js';
 export { chainsShidenPNG } from './generated/shidenPNG.js';
 export { chainsSkyekiwiPNG } from './generated/skyekiwiPNG.js';
 export { chainsSnakenetSVG } from './generated/snakenetSVG.js';
