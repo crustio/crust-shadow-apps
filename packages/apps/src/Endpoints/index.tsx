@@ -18,10 +18,10 @@ import { isAscii } from '@polkadot/util';
 import { useTranslation } from '../translate.js';
 import GroupDisplay from './Group.js';
 
-const shadowApiUrl = 'wss://rpc2-shadow.crust.network';
 const paraChainApiUrl = 'wss://crust-parachain.crustapps.net';
-const directUrl = 'https://shadow-apps.crust.network';
+const directUrl = 'https://apps.crust.network/';
 const directUrl2 = 'https://para-apps.crust.network';
+const mainnetApiUrl = 'wss://rpc.crust.network';
 
 interface Props {
   className?: string;
@@ -250,9 +250,8 @@ function Endpoints ({ className = '', offset, onClose }: Props): React.ReactElem
 
   const _onApply = useCallback(
     (): void => {
-      console.log(apiUrl);
-      if (apiUrl.startsWith('wss://rpc-sha')) {
-        window.location.href = `${directUrl}?rpc=${encodeURIComponent(shadowApiUrl)}${window.location.hash}`;
+      if (apiUrl.startsWith('wss://crust-main')) {
+        window.location.href = `${directUrl}?rpc=${encodeURIComponent(mainnetApiUrl)}${window.location.hash}`;
         onClose();
       } else if (apiUrl.startsWith('wss://crust-para')) {
         window.location.href = `${directUrl2}?rpc=${encodeURIComponent(paraChainApiUrl)}${window.location.hash}`;

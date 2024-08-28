@@ -17,12 +17,9 @@ export const prodChains: Omit<EndpointOption, 'teleport'>[] = [
   {
     info: 'crust',
     providers: {
-      // OnFinality: 'wss://crust.api.onfinality.io/ws?apikey=04dc9514-ec6c-4293-a739-aad78f8b26b5',
-      'Crust Network 1': 'wss://rpc.crust.network',
-      'Crust Network 2': 'wss://rpc.crustnetwork.xyz',
-      'Crust Network 3': 'wss://rpc.crustnetwork.cc',
-      'Crust Network 4': 'wss://rpc.crustnetwork.app',
-      'DCloud Foundation': 'wss://rpc-crust-mainnet.decoo.io',
+      'Crust Network': 'wss://crust-main.crust.network',
+      OnFinality: 'wss://crust-main.api.onfinality.io/public-ws',
+      'DCloud Foundation': 'wss://crust-main.dcf.network/public-ws'
     },
     text: 'Crust',
     ui: {
