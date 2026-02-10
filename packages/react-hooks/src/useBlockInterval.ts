@@ -17,8 +17,9 @@ import { useCall } from './useCall.js';
 // Use a low minimum validity threshold to check these against
 const THRESHOLD = BN_THOUSAND.div(BN_TWO);
 const DEFAULT_TIME = new BN(6_000);
-
-function calcInterval (api: ApiPromise): BN {
+const DEF_SHADOW_TIME = new BN(24_000);
+function calcInterval(api: ApiPromise): BN {
+  // return DEFAULT_TIME
   return bnMin(A_DAY, (
     // Babe, e.g. Relay chains (Substrate defaults)
     api.consts.babe?.expectedBlockTime ||
@@ -38,9 +39,8 @@ function calcInterval (api: ApiPromise): BN {
     )
   ));
 }
-
-function useBlockIntervalImpl (apiOverride?: ApiPromise | null): BN {
-  const { api } = useApi();
+function useBlockIntervalImpl(apiOverride?: ApiPromise | null): BN {
+  const { api, systemChain } = useApi();
 
   const currApi = apiOverride || api;
   const blockTimeAura = useCall<BN>(currApi.call.auraApi?.slotDuration && currApi.call.auraApi.slotDuration, []);
@@ -49,7 +49,7 @@ function useBlockIntervalImpl (apiOverride?: ApiPromise | null): BN {
   });
 
   return useMemo(
-    () => (blockTimeAura || blockTimeBabe) ?? calcInterval(currApi),
+    () => systemChain === 'Crust Shadow' ? DEF_SHADOW_TIME : (blockTimeAura || blockTimeBabe) ?? calcInterval(currApi),
     [blockTimeAura, blockTimeBabe, currApi]
   );
 }
